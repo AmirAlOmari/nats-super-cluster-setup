@@ -1,0 +1,220 @@
+services:
+  # NATS Cluster 1 (East)
+  nats-east-1:
+    image: nats:2.11.6-alpine
+    container_name: nats-east-1
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-east-1
+    ports:
+      - '5222:4222'
+      - '9222:8222'
+    volumes:
+      - ./nats-configs/clustered/east.conf:/nats-server.conf:ro
+      - nats-east-1-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  nats-east-2:
+    image: nats:2.11.6-alpine
+    container_name: nats-east-2
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-east-2
+    ports:
+      - '5223:4222'
+      - '9223:8222'
+    volumes:
+      - ./nats-configs/clustered/east.conf:/nats-server.conf:ro
+      - nats-east-2-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  nats-east-3:
+    image: nats:2.11.6-alpine
+    container_name: nats-east-3
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-east-3
+    ports:
+      - '5224:4222'
+      - '9224:8222'
+    volumes:
+      - ./nats-configs/clustered/east.conf:/nats-server.conf:ro
+      - nats-east-3-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  # NATS Cluster 2 (West)
+  nats-west-1:
+    image: nats:2.11.6-alpine
+    container_name: nats-west-1
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-west-1
+    ports:
+      - '5225:4222'
+      - '9225:8222'
+    volumes:
+      - ./nats-configs/clustered/west.conf:/nats-server.conf:ro
+      - nats-west-1-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  nats-west-2:
+    image: nats:2.11.6-alpine
+    container_name: nats-west-2
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-west-2
+    ports:
+      - '5226:4222'
+      - '9226:8222'
+    volumes:
+      - ./nats-configs/clustered/west.conf:/nats-server.conf:ro
+      - nats-west-2-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  nats-west-3:
+    image: nats:2.11.6-alpine
+    container_name: nats-west-3
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-west-3
+    ports:
+      - '5227:4222'
+      - '9227:8222'
+    volumes:
+      - ./nats-configs/clustered/west.conf:/nats-server.conf:ro
+      - nats-west-3-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  # NATS Cluster 3 (Central)
+  nats-central-1:
+    image: nats:2.11.6-alpine
+    container_name: nats-central-1
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-central-1
+    ports:
+      - '5228:4222'
+      - '9228:8222'
+    volumes:
+      - ./nats-configs/clustered/central.conf:/nats-server.conf:ro
+      - nats-central-1-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  nats-central-2:
+    image: nats:2.11.6-alpine
+    container_name: nats-central-2
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-central-2
+    ports:
+      - '5229:4222'
+      - '9229:8222'
+    volumes:
+      - ./nats-configs/clustered/central.conf:/nats-server.conf:ro
+      - nats-central-2-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  nats-central-3:
+    image: nats:2.11.6-alpine
+    container_name: nats-central-3
+    env_file:
+      - .docker/compose/.env.nats.shared
+    environment:
+      - NATS_SERVER_NAME=nats-central-3
+    ports:
+      - '5230:4222'
+      - '9230:8222'
+    volumes:
+      - ./nats-configs/clustered/central.conf:/nats-server.conf:ro
+      - nats-central-3-data:/data
+    command: ['-c', '/nats-server.conf']
+    networks:
+      - nats-supercluster
+
+  # nats-central-4:
+  #   image: nats:2.11.6-alpine
+  #   container_name: nats-central-4
+  #   env_file:
+  #     - .docker/compose/.env.nats.shared
+  #   environment:
+  #     - NATS_SERVER_NAME=nats-central-4
+  #   ports:
+  #     - '5231:4222'
+  #     - '9231:8222'
+  #   volumes:
+  #     - ./nats-configs/clustered/central.conf:/nats-server.conf:ro
+  #     - nats-central-4-data:/data
+  #   command: ['-c', '/nats-server.conf']
+  #   networks:
+  #     - nats-supercluster
+
+  # nats-central-5:
+  #   image: nats:2.11.6-alpine
+  #   container_name: nats-central-5
+  #   env_file:
+  #     - .docker/compose/.env.nats.shared
+  #   environment:
+  #     - NATS_SERVER_NAME=nats-central-5
+  #   ports:
+  #     - '5232:4222'
+  #     - '9232:8222'
+  #   volumes:
+  #     - ./nats-configs/clustered/central.conf:/nats-server.conf:ro
+  #     - nats-central-5-data:/data
+  #   command: ['-c', '/nats-server.conf']
+  #   networks:
+  #     - nats-supercluster
+
+  # # NATS Box for testing and management
+  # nats-box:
+  #   image: natsio/nats-box:0.18.0
+  #   container_name: nats-box
+  #   networks:
+  #     - nats-supercluster
+  #   command: ['sleep', 'infinity']
+  #   # restart: unless-stopped
+  #   depends_on:
+  #     - nats-east-1
+  #     - nats-west-1
+  #     - nats-central-1
+
+networks:
+  nats-supercluster:
+    driver: bridge
+
+volumes:
+  nats-east-1-data:
+  nats-east-2-data:
+  nats-east-3-data:
+  nats-west-1-data:
+  nats-west-2-data:
+  nats-west-3-data:
+  nats-central-1-data:
+  nats-central-2-data:
+  nats-central-3-data:
+  # nats-central-4-data:
+  # nats-central-5-data:
